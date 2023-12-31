@@ -1,16 +1,25 @@
 // Project.js
 
 class Project {
-    projects = [];
+    static projects = [];
+    static counter = 0;
+
     constructor(name = 'New Project', description = 'New Project') {
         this._name = name;
         this._description = description;
         this._tasks = [];
         Project.projects.push(this);
+        this._id = ++Project.counter;
     }
 
-    static deleteProject(index) {
-        Project.projects.splice(index, 1);
+    static getProjects() {
+        return Project.projects;
+    }
+
+    static deleteProject(id) {
+        Project.projects.filter((project) => {
+            return project._id != id;
+        });
     }
 
     get name() {
@@ -33,8 +42,10 @@ class Project {
         this._tasks.push(task);
     }
 
-    removeTask(index) {
-        this._tasks.splice(index, 1);
+    deleteTodo(id) {
+        this._tasks = this._tasks.filter((task) => {
+            return task._id != id;
+        });
     }
 };
 

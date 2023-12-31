@@ -1,7 +1,7 @@
-// Todos.js
+// Todo.js
 
-class Todos {
-    static todoList = [];
+class Todo {
+    static counter = 0;
 
     constructor(title = 'New Task', description = 'New Task', 
     dueDate = new Date(), priority = 'L', notes = []) {
@@ -11,15 +11,7 @@ class Todos {
         this._priority = priority;
         this._notes = notes;
         this._completionStatus = false;
-        Todos.todoList.push(this);
-    }
-
-    static getTodoList() {
-        return Todos.todoList;
-    }
-
-    static deleteTodo(index) {
-        Todos.todoList.splice(index, 1);
+        this._id = ++Todo.counter;
     }
 
     get title() {
@@ -67,4 +59,4 @@ class Todos {
     }
 };
 
-export default Todos;
+export default Todo;
