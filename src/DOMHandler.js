@@ -16,7 +16,10 @@ const appendTasks = function(tasks, appendTo) {
     appendTo.innerHTML = '';
     tasks.forEach((task) => {
         const li = document.createElement('li');
-        li.textContent = `${task.title} ${format(task.dueDate, "d MMMM yyyy")}`;
+        li.setAttribute('id', task.id);
+        li.classList.add(task.priority);
+        li.classList.add(task.completionStatus);
+        li.textContent = `${task.title} ${format(task.dueDate, "MMMM do, yyyy")}`;
         appendTo.appendChild(li);
     });
 }
@@ -27,10 +30,10 @@ const homeListener = function(event) {
     const mainTasks = document.querySelector('.show-tasks');
     
     tasks = tasks.filter((task) => {
-        if (event.target.id == 1) return true;
-        if (event.target.id == 2) return isSameDay(task.dueDate, new Date());
-        if (event.target.id == 3) return isSameWeek(task.dueDate, new Date());
-        if (event.target.id == 4) return isSameMonth(task.dueDate, new Date());
+        if (event.target.value == 1) return true;
+        if (event.target.value == 2) return isSameDay(task.dueDate, new Date());
+        if (event.target.value == 3) return isSameWeek(task.dueDate, new Date());
+        if (event.target.value == 4) return isSameMonth(task.dueDate, new Date());
     });
 
     tasks.sort((a, b) => a.dueDate - b.dueDate);

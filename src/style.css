@@ -98,10 +98,45 @@ main li {
     background-color: #ffffff;
     color: #1a1c29;
     margin: 12px 0;
-    height: 36px;
+    height: 24px;
     padding: 12px;
-    
+    border-radius: 8px;
 }
+
+.task-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+button {
+    color: black;
+    font-size: 36px;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+}
+
+.L {
+    background: linear-gradient(to right, #47fa6e 4px, white  );
+}
+
+.M {
+    background: linear-gradient(to right, #fad047 4px, white  );
+}
+
+.H {
+    background: linear-gradient(to right, #fa4747 4px, white  );
+}
+
+.true {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+
 
 /* ========== footer styles ========== */
 
