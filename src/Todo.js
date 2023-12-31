@@ -2,9 +2,10 @@
 
 class Todo {
     static counter = 0;
+    static tasks = [];
 
     constructor(title = 'New Task', description = 'New Task', 
-    dueDate = new Date(), priority = 'L', notes = []) {
+    dueDate = format(new Date(), "d MMMM yyyy"), priority = 'L', notes = []) {
         this._title = title;
         this._description = description;
         this._dueDate = dueDate;
@@ -12,6 +13,8 @@ class Todo {
         this._notes = notes;
         this._completionStatus = false;
         this._id = ++Todo.counter;
+        Todo.tasks.push(this);
+        
     }
 
     get title() {
@@ -28,6 +31,14 @@ class Todo {
 
     set description(newDescription) {
         this._description = newDescription;
+    }
+
+    get dueDate() {
+        return this._dueDate;
+    }
+
+    set dueDate(newDueDate) {
+        this._dueDate = newDueDate;
     }
 
     get priority() {
