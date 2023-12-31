@@ -5,7 +5,7 @@
 import Todo from './Todo.js';
 import Project from './Project.js';
 
-import { addHomeListeners, addProjectListeners } from "./DOMHandler.js";
+import { addHomeListeners, addProjectListeners, pageLoad } from "./DOMHandler.js";
 
 const fest = new Todo('aaaaa', 'new1', new Date(2024, 0, 1));
 const test1 = new Todo('bbbbb', 'new2', new Date(2024, 0, 12));
@@ -34,6 +34,6 @@ console.log(Project.projects[0]._tasks);
 // console.log(project1);
 
 
-
+pageLoad();
 addHomeListeners();
 addProjectListeners();

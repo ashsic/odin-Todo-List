@@ -4,6 +4,14 @@ import Todo from './Todo.js';
 import Project from './Project.js';
 import { compareAsc, format, isSameDay, isSameWeek, isSameMonth } from "date-fns";
 
+const pageLoad = function() {
+    let tasks = Todo.tasks.slice();
+    const mainTasks = document.querySelector('.show-tasks');
+    tasks.sort((a, b) => a.dueDate - b.dueDate);
+    appendTasks(tasks, mainTasks);
+};
+
+
 const appendTasks = function(tasks, appendTo) {
     appendTo.innerHTML = '';
     tasks.forEach((task) => {
@@ -55,4 +63,4 @@ const addProjectListeners = function() {
     });
 };
 
-export { addHomeListeners, addProjectListeners };
+export { addHomeListeners, addProjectListeners, pageLoad };
