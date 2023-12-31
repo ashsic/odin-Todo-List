@@ -17,9 +17,17 @@ class Project {
     }
 
     static deleteProject(id) {
-        Project.projects.filter((project) => {
+        Project.projects = Project.projects.filter((project) => {
             return project._id != id;
         });
+    }
+
+    static deleteTodo(id) {
+        Project.projects.forEach((project) => {
+            project._tasks = project._tasks.filter((task) => {
+                return task._id != id;
+            });
+        });  
     }
 
     get name() {
@@ -42,11 +50,6 @@ class Project {
         this._tasks.push(task);
     }
 
-    deleteTodo(id) {
-        this._tasks = this._tasks.filter((task) => {
-            return task._id != id;
-        });
-    }
 };
 
 export default Project;
