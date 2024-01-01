@@ -2,15 +2,24 @@
 
 import Todo from './Todo.js';
 import Project from './Project.js';
-import { compareAsc, format, isSameDay, isSameWeek, isSameMonth } from "date-fns";
+import { format, isSameDay, isSameWeek, isSameMonth } from "date-fns";
 
 const pageLoad = function() {
     let tasks = Todo.tasks.slice();
     const mainTasks = document.querySelector('.show-tasks');
     tasks.sort((a, b) => a.dueDate - b.dueDate);
     appendTasks(tasks, mainTasks);
+    document.querySelector('.main-subtitle').textContent = 'All Tasks';
 };
 
+const exitForm = (event) => {
+    event.preventDefault();
+    if (event.target.parentNode.tagName === 'FORM') {
+        event.target.parentNode.remove();
+        return;
+      }
+    event.target.parentNode.parentNode.remove();
+};
 
 const appendTasks = function(tasks, appendTo) {
     appendTo.innerHTML = '';
@@ -51,7 +60,6 @@ const addHomeListeners = function() {
 const projectListener = function(event) {
     document.querySelector('.main-subtitle').textContent = event.target.textContent;
     let tasks = Project.projects[parseInt(event.target.id)].tasks;
-    console.log(tasks);
     const mainTasks = document.querySelector('.show-tasks');
     
     tasks.sort((a, b) => a.dueDate - b.dueDate);
@@ -83,10 +91,27 @@ const newProjectHandler = function(event) {
     const no = document.createElement('button');
     yes.setAttribute('id', 'yes');
     no.setAttribute('id', 'no');
-    yes.innerHTML = '<i class="fas fa-check">';
+    yes.innerHTML = '+';
     no.innerHTML = '<i class="fas fa-times"></i>';
     form.appendChild(yes);
     form.appendChild(no);
+
+    no.addEventListener('click', exitForm);
+
+    yes.addEventListener('click', (event) => {
+        event.preventDefault();
+        new Project(event.target.parentNode.projectName.value);
+        const projects = document.querySelector('.projects');
+        projects.innerHTML = '';
+        event.target.parentNode.remove();
+        Project.projects.forEach((project, index) => {
+            const li2 = document.createElement('li');
+            li2.setAttribute('id', index);
+            li2.textContent = `${project.name}`;
+            projects.appendChild(li2);
+        });
+        addProjectListeners();
+    });
 
     event.target.after(form);
 };
@@ -129,6 +154,7 @@ const newTaskHandler = function(event) {
     radio1.setAttribute('type', 'radio');
     radio1.setAttribute('name', 'priority');
     radio1.setAttribute('value', 'L');
+    radio1.checked = true;
     const radioLabel1 = document.createElement('label');
     radioLabel1.textContent = 'Low';
     radioLabel1.appendChild(radio1);
@@ -160,24 +186,55 @@ const newTaskHandler = function(event) {
     const date = document.createElement('input');
     date.setAttribute('type', 'date');
     date.setAttribute('id', 'date');
+    date.value = new Date().toISOString().split('T')[0];
     form.appendChild(date);
 
     const button = document.createElement('button');
     button.textContent = '+';
     form.appendChild(button);
 
-    no.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.target.parentNode.parentNode.remove();
-    })
+    const label4 = document.createElement('label');
+    label4.setAttribute('for', 'select');
+    label4.textContent = 'Project: ';
+    form.appendChild(label4);
+
+    const select = document.createElement('select');
+    select.setAttribute('id', 'select');
+
+    const option2 = document.createElement('option');
+    select.appendChild(option2);
+
+    Project.projects.forEach((project, index) => {
+        const option = document.createElement('option');
+        option.textContent = project.name;
+        select.appendChild(option);
+    });
+    
+
+    form.appendChild(select);
+
+    no.addEventListener('click', exitForm);
 
     button.addEventListener('click', (event) => {
         const taskForm = event.target.parentNode;
         event.preventDefault();
         const currDate = new Date(taskForm.date.value)
         currDate.setDate(currDate.getDate() + 1);
-        new Todo(taskForm.title.value, taskForm.description.value, currDate, taskForm.priority.value);
+        const newTask = new Todo(taskForm.title.value, taskForm.description.value, currDate, taskForm.priority.value);
+        
+        if (taskForm.select.selectedIndex > 0){
+            const project = Project.projects[taskForm.select.selectedIndex - 1];
+            console.log(project);
+            project.addTask(newTask);
+        }
+
         pageLoad();
+
+        if (event.target.parentNode.tagName === 'FORM') {
+            event.target.parentNode.remove();
+            return;
+        }
+        event.target.parentNode.parentNode.remove();
     });
 
     event.target.after(form);
@@ -185,16 +242,8 @@ const newTaskHandler = function(event) {
 
 const addButtonHandlers = function() {
     const buttons = document.querySelectorAll('button');
-    console.log(buttons[0].textContent);
     buttons[0].addEventListener('click', newProjectHandler);
     buttons[1].addEventListener('click', newTaskHandler);
 };
-
-
-
-
-
-
-
 
 export { addHomeListeners, addProjectListeners, pageLoad, addButtonHandlers };
