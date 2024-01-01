@@ -94,12 +94,16 @@ h1 {
 }
 
 form {
-    background-color: #a8a8a8;
+    background-color: #2d3149;
     border-radius: 8px;
     padding: 24px;
     border: 2px solid white;
     position: absolute;
-    bottom: -100px;
+    bottom: -96px;
+}
+
+form > input {
+    width: 100%;
 }
 
 #yes {
@@ -130,11 +134,31 @@ input {
 
 main form {
     position: absolute;
-    background-color: black;
-    top: 64px;
-    height: 300px;
+    top: 10px;
+    right: 10px;
+    height: 700px;
+    width: 400px;
     display: flex;
     flex-direction: column;
+    z-index: 1;
+}
+
+main form > * {
+    margin: 12px;
+    width: auto;
+}
+
+input[type="radio"] {
+    height: 24px;
+    width: 100%;
+    justify-self: end;
+    align-self: flex-end;
+
+}
+
+label {
+    display: flex;
+    
 }
 
 /* ========== main styles ========== */
@@ -171,7 +195,7 @@ main li {
 main button {
     background-color: #2d3149;
     border: 2px solid #a8a8a8;
-    font-size: 36px;
+    font-size: 24px;
     width: 56px;
     height: 56px;
     border-radius: 8px;

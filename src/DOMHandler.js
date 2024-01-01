@@ -111,11 +111,74 @@ const newTaskHandler = function(event) {
     title.setAttribute('id', 'title');
     form.appendChild(title);
 
+    const label2 = document.createElement('label');
+    label2.setAttribute('for', 'description');
+    label2.textContent = 'Description: ';
+    form.appendChild(label2);
+
     const description = document.createElement('input');
     description.setAttribute('type', 'text');
     description.setAttribute('id', 'description');
     form.appendChild(description);
 
+    const p = document.createElement('p');
+    p.textContent = 'Priority: ';
+    form.appendChild(p);
+
+    const radio1 = document.createElement('input');
+    radio1.setAttribute('type', 'radio');
+    radio1.setAttribute('name', 'priority');
+    radio1.setAttribute('value', 'L');
+    const radioLabel1 = document.createElement('label');
+    radioLabel1.textContent = 'Low';
+    radioLabel1.appendChild(radio1);
+    form.appendChild(radioLabel1);
+
+    const radio2 = document.createElement('input');
+    radio2.setAttribute('type', 'radio');
+    radio2.setAttribute('name', 'priority');
+    radio2.setAttribute('value', 'M');
+    const radioLabel2 = document.createElement('label');
+    radioLabel2.textContent = 'Medium';
+    radioLabel2.appendChild(radio2);
+    form.appendChild(radioLabel2);
+
+    const radio3 = document.createElement('input');
+    radio3.setAttribute('type', 'radio');
+    radio3.setAttribute('name', 'priority');
+    radio3.setAttribute('value', 'H');
+    const radioLabel3 = document.createElement('label');
+    radioLabel3.textContent = 'High';
+    radioLabel3.appendChild(radio3);
+    form.appendChild(radioLabel3);
+
+    const label3 = document.createElement('label');
+    label3.setAttribute('for', 'date');
+    label3.textContent = 'Due Date: ';
+    form.appendChild(label3);
+
+    const date = document.createElement('input');
+    date.setAttribute('type', 'date');
+    date.setAttribute('id', 'date');
+    form.appendChild(date);
+
+    const button = document.createElement('button');
+    button.textContent = '+';
+    form.appendChild(button);
+
+    no.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.target.parentNode.parentNode.remove();
+    })
+
+    button.addEventListener('click', (event) => {
+        const taskForm = event.target.parentNode;
+        event.preventDefault();
+        const currDate = new Date(taskForm.date.value)
+        currDate.setDate(currDate.getDate() + 1);
+        new Todo(taskForm.title.value, taskForm.description.value, currDate, taskForm.priority.value);
+        pageLoad();
+    });
 
     event.target.after(form);
 };

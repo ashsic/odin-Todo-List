@@ -10,7 +10,6 @@ class Todo {
         this._description = description;
         this._dueDate = dueDate;
         this._priority = priority;
-        this._notes = notes;
         this._completionStatus = completionStatus;
         this._id = ++Todo.counter;
         Todo.tasks.push(this);
@@ -63,26 +62,6 @@ class Todo {
 
     set priority(newPriority) {
         this._priority = newPriority;
-    }
-
-    get notes() {
-        return this._notes;
-    }
-
-    editNote(index, newNote) {
-        this._notes[index] = newNote;
-    }
-
-    addNote(note) {
-        this._notes.push(note);
-    }
-
-    removeNote(index) {
-        this._notes.splice(index, 1);
-    }
-
-    completeTodo() {
-        this._completionStatus = true;
     }
 };
 
