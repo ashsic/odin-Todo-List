@@ -6,9 +6,8 @@ class Project {
     static projects = [];
     static counter = 0;
 
-    constructor(name = 'New Project', description = 'New Project') {
+    constructor(name = 'New Project') {
         this._name = name;
-        this._description = description;
         this._tasks = [];
         Project.projects.push(this);
         this._id = ++Project.counter;
@@ -41,14 +40,6 @@ class Project {
 
     set name(newName) {
         this._name = newName;
-    }
-
-    get description() {
-        return this._description;
-    }
-
-    set description(newDescription) {
-        this._description = newDescription;
     }
 
     get tasks() {

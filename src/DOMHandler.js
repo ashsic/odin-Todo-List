@@ -66,4 +66,42 @@ const addProjectListeners = function() {
     });
 };
 
-export { addHomeListeners, addProjectListeners, pageLoad };
+const newProjectHandler = function(event) {
+    const form = document.createElement('form');
+
+    const label = document.createElement('label');
+    label.setAttribute('for', 'projectName');
+    label.textContent = 'Name: ';
+    form.appendChild(label);
+
+    const title = document.createElement('input');
+    title.setAttribute('type', 'text');
+    title.setAttribute('id', 'projectName');
+    form.appendChild(title);
+
+    const yes = document.createElement('button');
+    const no = document.createElement('button');
+    yes.setAttribute('id', 'yes');
+    no.setAttribute('id', 'no');
+    yes.innerHTML = '<i class="fas fa-check">';
+    no.innerHTML = '<i class="fas fa-times"></i>';
+    form.appendChild(yes);
+    form.appendChild(no);
+
+    event.target.after(form);
+};
+
+const addButtonHandlers = function() {
+    const buttons = document.querySelectorAll('button');
+    console.log(buttons[0].textContent);
+    buttons[0].addEventListener('click', newProjectHandler);
+};
+
+
+
+
+
+
+
+
+export { addHomeListeners, addProjectListeners, pageLoad, addButtonHandlers };
