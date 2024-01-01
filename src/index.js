@@ -1,11 +1,11 @@
 // index.js
 
-
-
 import Todo from './Todo.js';
 import Project from './Project.js';
 
-import { addHomeListeners, addProjectListeners, pageLoad, addButtonHandlers } from "./DOMHandler.js";
+import {
+  addHomeListeners, addProjectListeners, pageLoad, addButtonHandlers,
+} from './DOMHandler.js';
 
 const fest = new Todo('Test task', 'Test', new Date(2024, 0, 1));
 const test1 = new Todo('Brush Teeth', 'Use a toothbrush to brush my teeth', new Date(2024, 0, 12));

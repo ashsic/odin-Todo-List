@@ -1,68 +1,74 @@
 // Todo.js
 
 class Todo {
-    static counter = 0;
-    static tasks = [];
+  static counter = 0;
 
-    constructor(title = 'New Task', description = 'New Task', 
-    dueDate = format(new Date(), "d MMMM yyyy"), priority = 'L', notes = [], completionStatus = false) {
-        this._title = title;
-        this._description = description;
-        this._dueDate = dueDate;
-        this._priority = priority;
-        this._completionStatus = completionStatus;
-        this._id = ++Todo.counter;
-        Todo.tasks.push(this);
-        
-    }
+  static tasks = [];
 
-    get id() {
-        return this._id;
-    }
+  constructor(
+    title = 'New Task',
+    description = 'New Task',
+    dueDate = format(new Date(), 'd MMMM yyyy'),
+    priority = 'L',
+    notes = [],
+    completionStatus = false,
+  ) {
+    this._title = title;
+    this._description = description;
+    this._dueDate = dueDate;
+    this._priority = priority;
+    this._completionStatus = completionStatus;
+    this._id = ++Todo.counter;
+    Todo.tasks.push(this);
+  }
 
-    set id(newId) {
-        this._id = newId;
-    }
+  get id() {
+    return this._id;
+  }
 
-    get completionStatus() {
-        return this._completionStatus;
-    }
+  set id(newId) {
+    this._id = newId;
+  }
 
-    set completionStatus(newCompletionStatus) {
-        this._completionStatus = newCompletionStatus;
-    }
+  get completionStatus() {
+    return this._completionStatus;
+  }
 
-    get title() {
-        return this._title;
-    }
+  set completionStatus(newCompletionStatus) {
+    this._completionStatus = newCompletionStatus;
+  }
 
-    set title(newTitle) {
-        this._title = newTitle;
-    }
+  get title() {
+    return this._title;
+  }
 
-    get description() {
-        return this._description;
-    }
+  set title(newTitle) {
+    this._title = newTitle;
+  }
 
-    set description(newDescription) {
-        this._description = newDescription;
-    }
+  get description() {
+    return this._description;
+  }
 
-    get dueDate() {
-        return this._dueDate;
-    }
+  set description(newDescription) {
+    this._description = newDescription;
+  }
 
-    set dueDate(newDueDate) {
-        this._dueDate = newDueDate;
-    }
+  get dueDate() {
+    return this._dueDate;
+  }
 
-    get priority() {
-        return this._priority;
-    }
+  set dueDate(newDueDate) {
+    this._dueDate = newDueDate;
+  }
 
-    set priority(newPriority) {
-        this._priority = newPriority;
-    }
-};
+  get priority() {
+    return this._priority;
+  }
+
+  set priority(newPriority) {
+    this._priority = newPriority;
+  }
+}
 
 export default Todo;
