@@ -91,10 +91,40 @@ const newProjectHandler = function(event) {
     event.target.after(form);
 };
 
+const newTaskHandler = function(event) {
+    const form = document.createElement('form');
+
+    const div = document.createElement('div');
+    div.classList.add('row');
+    const no = document.createElement('button');
+    no.textContent = 'X';
+    div.appendChild(no);
+    form.appendChild(div);
+
+    const label = document.createElement('label');
+    label.setAttribute('for', 'title');
+    label.textContent = 'Title: ';
+    form.appendChild(label);
+
+    const title = document.createElement('input');
+    title.setAttribute('type', 'text');
+    title.setAttribute('id', 'title');
+    form.appendChild(title);
+
+    const description = document.createElement('input');
+    description.setAttribute('type', 'text');
+    description.setAttribute('id', 'description');
+    form.appendChild(description);
+
+
+    event.target.after(form);
+};
+
 const addButtonHandlers = function() {
     const buttons = document.querySelectorAll('button');
     console.log(buttons[0].textContent);
     buttons[0].addEventListener('click', newProjectHandler);
+    buttons[1].addEventListener('click', newTaskHandler);
 };
 
 

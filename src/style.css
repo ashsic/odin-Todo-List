@@ -128,6 +128,15 @@ input {
     position: relative;
 }
 
+main form {
+    position: absolute;
+    background-color: black;
+    top: 64px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
 /* ========== main styles ========== */
 
 main {
@@ -153,13 +162,18 @@ main li {
     align-items: center;
 }
 
+.row {
+    display: flex;
+    display: column;
+    justify-content: end;
+}
 
 main button {
     background-color: #2d3149;
     border: 2px solid #a8a8a8;
     font-size: 36px;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     border-radius: 8px;
 }
 
